@@ -1,0 +1,121 @@
+---
+title: "Inhalte verwalten"
+description: "Dokumentationsseiten erstellen, bearbeiten und organisieren"
+---
+
+<div id="navigating-your-files">
+  ## In Ihren Dateien navigieren
+</div>
+
+Verwenden Sie den Dateiexplorer in der Seitenleiste, um Ihre Dokumentationsdateien zu durchsuchen. Klicken Sie auf eine Datei, um sie im Editor zu öffnen.
+
+Drücken Sie <kbd>Command</kbd> + <kbd>P</kbd> (<kbd>Strg</kbd> + <kbd>P</kbd> unter Windows), um Dateien nach Namen zu suchen.
+
+<div id="creating-new-pages">
+  ## Neue Seiten erstellen
+</div>
+
+<Steps>
+  <Step title="Neue Datei erstellen">
+    Wählen Sie das **Neue Datei erstellen**-Icon in der Seitenleiste des Dateiexplorers aus.
+    
+    <img
+      src="/images/editor/files-menu-light.png"
+      className="block dark:hidden rounded-2xl border border-gray-100 shadow-lg"
+      style={{
+        width: '268px',
+        height: 'auto',
+      }}
+      alt="Dateimenü im Web-Editor"/>
+    <img
+      src="/images/editor/files-menu-dark.png"
+      className="hidden dark:block rounded-2xl border border-white/10 shadow-lg"
+      style={{
+        width: '268px',
+        height: 'auto',
+      }}
+      alt="Dateimenü im Web-Editor im Dark Mode"/>
+  </Step>
+  <Step title="Dateinamen eingeben">
+    Dateinamen müssen auf `.mdx` enden. Zum Beispiel `api-reference.mdx` oder `getting-started.mdx`.
+  </Step>
+  <Step title="Erstellen und öffnen">
+    Drücken Sie <kbd>Enter</kbd>, um die Datei zu erstellen. Sie wird automatisch im Editor geöffnet und ist bereit für das Hinzufügen von Inhalten.
+  </Step>
+</Steps>
+
+<div id="organizing-your-navigation">
+  ## Organisieren der Navigation
+</div>
+
+Füge deiner Seitennavigation neue Seiten hinzu, indem du die Datei `docs.json` bearbeitest.
+
+<Steps>
+  <Step title="docs.json öffnen">
+    Öffne die Datei `docs.json` im Stammverzeichnis mit dem Dateiexplorer.
+  </Step>
+  <Step title="Navigationsabschnitt finden">
+    Suche in der Datei `docs.json` die Stelle, an der du die neue Seite hinzufügen möchtest.
+  </Step>
+  <Step title="Seite hinzufügen">
+    Füge den Dateinamen der Seite (ohne die Erweiterung `.mdx`) in das `pages`-Array der entsprechenden Gruppe ein.
+  </Step>
+</Steps>
+
+<div id="example-adding-a-themes-page">
+  ### Beispiel: Hinzufügen einer Themenseite
+</div>
+
+```json title="Adding a themes page to the Profile group" highlight="18"
+{
+    "navigation": {
+        "groups": [
+            {
+                "group": "Erste Schritte",
+                "pages": [
+                    "index",
+                    "quickstart", 
+                    "installation"
+                ]
+            },
+            {
+                "group": "Profil",
+                "pages": [
+                    "settings",
+                    "account-types", 
+                    "dashboard",
+                    "themes"
+                ]
+            }
+        ]
+    }
+}
+```
+
+
+<div id="editing-content">
+  ## Inhalte bearbeiten
+</div>
+
+Nehmen Sie Änderungen an Ihren Seiten im visuellen Modus oder im Markdown-Modus im Editor vor.
+
+Drücken Sie im visuellen Modus <kbd>/</kbd>, um das Komponentenmenü zu öffnen. Fügen Sie Inhaltsblöcke, Hinweise, Code-Blocks und andere Komponenten hinzu, um Ihre Dokumentation anzupassen.
+
+<Frame>
+  <img 
+    src="/images/editor/component-menu-light.png" 
+    alt="Das ausgeklappte Komponentenmenü im Mintlify Web-Editor" 
+    className="block dark:hidden" 
+  />
+  <img 
+    src="/images/editor/component-menu-dark.png" 
+    alt="Das ausgeklappte Komponentenmenü im Mintlify Web-Editor" 
+    className="hidden dark:block" 
+  />
+</Frame>
+
+Im Markdown-Modus können Sie das `MDX` Ihrer Seiten direkt bearbeiten. Das ist hilfreich, wenn Sie:
+
+- Bestimmte Komponenten-Eigenschaften festlegen
+- Mit komplex verschachtelten Komponenten arbeiten
+- `MDX`-Inhalte aus anderen Quellen kopieren und einfügen

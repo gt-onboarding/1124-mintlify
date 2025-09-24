@@ -1,0 +1,156 @@
+---
+title: "Assistant"
+description: "Helfen Sie Ihren Nutzern, mit Ihrem Produkt erfolgreich zu sein und schneller Antworten zu finden"
+icon: "bot"
+---
+
+<Info>
+  Der Assistant ist bei [Pro- und Custom-Plänen](https://mintlify.com/pricing?ref=assistant) automatisch aktiviert.
+</Info>
+
+<div id="about-the-assistant">
+  ## Über den Assistenten
+</div>
+
+Der Assistent beantwortet Fragen zu Ihrer Dokumentation über Anfragen in natürlicher Sprache. Er ist direkt in Ihre Dokumentationsseiten eingebettet und bietet Nutzern sofortigen Zugriff auf kontextbezogene Hilfe.
+
+Der Assistent verwendet agentisches RAG (Retrieval-Augmented Generation) mit Toolaufrufen, unterstützt durch Claude Sonnet 4. Wenn Nutzer Fragen stellen, tut der Assistent Folgendes:
+
+* **Sucht und ruft** relevante Inhalte aus Ihrer Dokumentation ab, um präzise Antworten zu liefern.
+* **Zitiert Quellen** und stellt navigierbare Links bereit, die Nutzer direkt zu referenzierten Seiten führen.
+* **Generiert kopierbare Codebeispiele**, um Nutzern bei der Umsetzung von Lösungen aus Ihrer Dokumentation zu helfen.
+
+Jede an den Assistenten gesendete Nachricht zählt zu Ihrem Nachrichtenkontingent in Ihrem Tarif. Wenn Sie Ihr Kontingent überschreiten, fallen für zusätzliche Nachrichten Mehrkosten an. Sie können Ausgabenlimits festlegen oder den Assistenten deaktivieren, wenn Sie Ihr Nachrichtenkontingent erreicht haben.
+
+Sie können die Nutzung des Assistenten über Ihr Dashboard einsehen, um das Nutzerverhalten und die Effektivität Ihrer Dokumentation zu verstehen. Exportieren und analysieren Sie Abfragedaten, um Folgendes zu identifizieren:
+
+* Häufig gestellte Fragen, die möglicherweise eine bessere Abdeckung benötigen.
+* Inhaltslücken, bei denen Nutzer Schwierigkeiten haben, Antworten zu finden.
+* Beliebte Themen, die von zusätzlichen Inhalten profitieren könnten.
+
+<div id="configuring-the-assistant">
+  ## Konfiguration des Assistant
+</div>
+
+Der Assistant ist standardmäßig für Pro- und Custom-Pläne aktiviert. Sie können den Assistant in Ihrem [Dashboard](https://dashboard.mintlify.com/products/assistant/settings) verwalten – einschließlich Aktivieren oder Deaktivieren, Konfigurieren der Antwortverarbeitung und Festlegen eines Ausgabenlimits.
+
+<div id="assistant-status">
+  ### Status des Assistenten
+</div>
+
+Schalten Sie den Assistentenstatus um, um den Assistenten auf Ihrer Dokumentationsseite zu aktivieren oder zu deaktivieren.
+
+<div id="assistant-deflection">
+  ### Weiterleitung durch den Assistant
+</div>
+
+Ermöglichen Sie dem Assistant, unbeantwortete Fragen an Ihr Support-Team weiterzuleiten. Geben Sie eine E-Mail-Adresse an, die der Assistant Nutzenden bereitstellt, wenn er eine Frage nicht beantworten kann.
+
+<div id="search-sites">
+  ### Suchseiten
+</div>
+
+<Note>
+  Die Seitensuche befindet sich in der Beta. Um sie für Ihre Dokumentationsseite zu aktivieren, [kontaktieren Sie unser Vertriebsteam](mailto:gtm@mintlify.com).
+</Note>
+
+Konfigurieren Sie Seiten, die der Assistent für zusätzlichen Kontext bei der Beantwortung von Fragen durchsuchen kann.
+
+* Seiten müssen öffentlich zugänglich sein.
+* Seiten, die zum Laden JavaScript benötigen, werden nicht unterstützt.
+
+Sie können die folgende Filtersyntax verwenden, wenn Sie externe Seiten konfigurieren:
+
+* **Filterung auf Domain-Ebene**
+  * `example.com`: Nur die Domain `example.com` durchsuchen
+  * `docs.example.com`: Nur die Subdomain `docs.example.com` durchsuchen
+  * `*.example.com`: Alle Subdomains von `example.com` durchsuchen
+* **Filterung auf Pfad-Ebene**
+  * `docs.example.com/api`: Alle Seiten unter dem Unterpfad `/api` durchsuchen
+* **Mehrere Muster**
+  * Fügen Sie mehrere Einträge hinzu, um verschiedene Bereiche von Seiten abzudecken
+
+<div id="spend-limit">
+  ### Ausgabelimit
+</div>
+
+Legen Sie ein Ausgabelimit fest, um zu steuern, was passiert, wenn Sie Ihr Nachrichtenkontingent erreichen. Standardmäßig beantwortet der Assistant weiterhin Benutzerfragen, nachdem Sie Ihr Nachrichtenkontingent erreicht haben, wodurch Mehrkosten entstehen.
+
+Im Tab **Billing** auf der Seite [Assistant Configurations](https://dashboard.mintlify.com/products/assistant/settings) können Sie ein Ausgabelimit für Assistant-Nachrichten über Ihr Kontingent hinaus festlegen. Wenn Sie Ihr Ausgabelimit erreichen, wird der Assistant deaktiviert, bis Ihr Nachrichtenkontingent zurückgesetzt wird.
+
+Sie können außerdem Nutzungsbenachrichtigungen einrichten, um eine E-Mail zu erhalten, wenn Sie einen bestimmten Prozentsatz Ihres Ausgabelimits erreichen.
+
+<div id="using-the-assistant">
+  ## Verwendung des Assistenten
+</div>
+
+Benutzer können auf drei Arten auf den Assistenten zugreifen:
+
+* **Tastenkombinationen**: <kbd>?</kbd> oder <kbd>Command</kbd> + <kbd>I</kbd> (<kbd>Ctrl</kbd> + <kbd>I</kbd> unter Windows)
+* **Schaltfläche „Assistent“** neben der Suchleiste
+  <img
+    src="/images/assistant/assistant-button-light.png"
+    className="block dark:hidden rounded-2xl border border-gray-100 shadow-lg"
+    style={{
+    width: '268px',
+    height: 'auto',
+  }}
+    alt="Suchleiste und Assistent-Schaltfläche im light-Modus."
+  />
+  <img
+    src="/images/assistant/assistant-button-dark.png"
+    className="hidden dark:block rounded-2xl border border-white/10 shadow-lg"
+    style={{
+    width: '268px',
+    height: 'auto',
+  }}
+    alt="Suchleiste und Assistent-Schaltfläche im dark-Modus."
+  />
+* **URLs**, denen `?assistant=open` angehängt ist, öffnen den Assistenten beim Laden der Seite. Zum Beispiel: [https://mintlify.com/docs?assistant=open](https://mintlify.com/docs?assistant=open).
+
+Alle drei Wege öffnen ein Chat-Panel auf der rechten Seite Ihrer Dokumentation. Benutzer können beliebige Fragen stellen, und der Assistent durchsucht Ihre Dokumentation nach einer Antwort. Wenn keine relevanten Informationen gefunden werden, teilt der Assistent mit, dass er die Frage nicht beantworten kann.
+
+<div id="making-content-ai-ingestible">
+  ## Inhalte für KI besser nutzbar machen
+</div>
+
+Strukturieren Sie Ihre Dokumentation so, dass der Assistent präzise und relevante Antworten geben kann. Eine klare Organisation und umfassender Kontext helfen sowohl menschlichen Lesern als auch der KI-Verarbeitung.
+
+<Card title="Struktur und Organisation">
+  * Verwenden Sie semantisches Markup.
+  * Formulieren Sie aussagekräftige Abschnittsüberschriften.
+  * Bauen Sie eine logische Informationshierarchie auf.
+  * Nutzen Sie konsistente Formatierung in Ihrer Doku.
+  * Ergänzen Sie umfassende Metadaten im Seiten-Frontmatter.
+  * Gliedern Sie lange Textblöcke in kürzere Absätze.
+</Card>
+
+<Card title="Kontext">
+  * Definieren Sie spezifische Begriffe und Akronyme beim ersten Auftreten.
+  * Stellen Sie ausreichenden konzeptionellen Kontext zu Funktionen und Abläufen bereit.
+  * Fügen Sie Beispiele und Use Cases hinzu.
+  * Verweisen Sie auf verwandte Themen.
+  * Ergänzen Sie [versteckte Seiten](/de/guides/hidden-pages) mit zusätzlichem Kontext, den Nutzer nicht benötigen, auf den der Assistent jedoch zurückgreifen kann.
+</Card>
+
+<div id="exporting-and-analyzing-queries">
+  ## Exportieren und Analysieren von Abfragen
+</div>
+
+Überprüfen und exportieren Sie Abfragen aus Ihrem Dashboard, um zu verstehen, wie Nutzende mit Ihrer Dokumentation interagieren, und um Verbesserungsmöglichkeiten zu identifizieren. So kann die Analyse von Abfragen Ihre Dokumentation verbessern:
+
+* Identifizieren Sie Inhaltslücken, bei denen häufige Abfragen unzureichend beantwortet werden.
+* Erkennen Sie Verhaltensmuster und gemeinsame Informationsbedürfnisse anhand von Themen und Mustern in den Abfragen.
+* Priorisieren Sie Seiten mit hohem Traffic für Verbesserungen bei Genauigkeit und Qualität.
+
+Sie können Abfragen in Ihrem [Dashboard](https://dashboard.mintlify.com/products/assistant) erkunden. Für tiefere Einblicke empfehlen wir jedoch, eine `CSV`-Datei mit Ihren Abfragen, Antworten und Quellen zu exportieren, um diese mit Ihrem bevorzugten KI-Tool zu analysieren.
+
+1. Navigieren Sie zur [Assistant-Seite](https://dashboard.mintlify.com/products/assistant) in Ihrem Dashboard.
+2. Wählen Sie **Export to CSV**.
+3. Analysieren Sie die exportierten Daten mit Ihrem bevorzugten Tool.
+
+<Card title="Beispielhafte Analyse-Prompts">
+  * Fassen Sie die häufigsten Themen der Abfragen zusammen.
+  * Listen Sie alle Abfragen auf, für die keine Quellen angegeben wurden.
+  * Finden Sie Muster in erfolglosen Interaktionen.
+</Card>

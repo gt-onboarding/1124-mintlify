@@ -1,0 +1,284 @@
+---
+title: "Überschriften und Text"
+description: "Erfahren Sie, wie Sie Text formatieren, Überschriften erstellen und Inhalte gestalten"
+icon: "heading"
+---
+
+<div id="headers">
+  ## Überschriften
+</div>
+
+Überschriften strukturieren Ihre Inhalte und erzeugen Navigationsanker. Sie erscheinen im Inhaltsverzeichnis und helfen Nutzern, Ihre Dokumentation schnell zu erfassen.
+
+<div id="creating-headers">
+  ### Überschriften erstellen
+</div>
+
+Verwenden Sie das Zeichen `#`, um Überschriften unterschiedlicher Ebenen zu erstellen:
+
+```mdx
+## Hauptabschnitts-Überschrift
+### Unterabschnitts-Überschrift
+#### Unter-Unterabschnitts-Überschrift
+```
+
+<Tip>
+  Verwenden Sie aussagekräftige, keywordreiche Überschriften, die den nachfolgenden Inhalt klar erkennen lassen. Das verbessert sowohl die Navigation als auch die Suchmaschinenoptimierung.
+</Tip>
+
+<div id="disabling-anchor-links">
+  ### Ankerlinks deaktivieren
+</div>
+
+Standardmäßig enthalten Überschriften anklickbare Ankerlinks, mit denen Nutzende direkt zu bestimmten Abschnitten verlinken können. Sie können diese Ankerlinks mit dem Prop `noAnchor` in HTML- oder React-Überschriften deaktivieren.
+
+<CodeGroup>
+  ```mdx HTML header example
+  <h2 noAnchor>
+  Überschrift ohne Ankerlink
+  </h2>
+  ```
+
+  ```mdx React header example
+  <Heading level={2} noAnchor>
+  Überschrift ohne Ankerlink
+  </Heading>
+  ```
+</CodeGroup>
+
+Wenn `noAnchor` verwendet wird, zeigt die Überschrift den Anker-Chip nicht an und ein Klick auf den Überschriftentext kopiert den Ankerlink nicht in die Zwischenablage.
+
+<div id="text-formatting">
+  ## Textformatierung
+</div>
+
+Wir unterstützen die meisten Markdown-Formatierungen zum Hervorheben und Stylen von Text.
+
+<div id="basic-formatting">
+  ### Grundlegende Formatierung
+</div>
+
+Wenden Sie diese Formatierungsstile auf Ihren Text an:
+
+| Stil | Syntax | Beispiel | Ergebnis |
+|-------|--------|---------|--------|
+| **Fett** | `**text**` | `**wichtiger Hinweis**` | **wichtiger Hinweis** |
+| *Kursiv* | `_text_` | `_Hervorhebung_` | *Hervorhebung* |
+| ~~Durchgestrichen~~ | `~text~` | `~veraltete Funktion~` | ~~veraltete Funktion~~ |
+
+<div id="combining-formats">
+  ### Formatierungen kombinieren
+</div>
+
+Sie können Formatierungsstile kombinieren:
+
+```mdx
+**_fett und kursiv_**
+**~~fett und durchgestrichen~~**
+*~~kursiv und durchgestrichen~~**
+```
+
+***fett und kursiv***<br />
+**~~fett und durchgestrichen~~**<br />
+*~~kursiv und durchgestrichen~~*
+
+<div id="superscript-and-subscript">
+  ### Hoch- und Tiefstellung
+</div>
+
+Für mathematische Ausdrücke oder Fußnoten verwenden Sie HTML-Tags:
+
+| Typ | Syntax | Beispiel | Ergebnis |
+|------|--------|---------|--------|
+| Hochstellung | `<sup>text</sup>` | `example<sup>2</sup>` | example<sup>2</sup> |
+| Tiefstellung | `<sub>text</sub>` | `example<sub>n</sub>` | example<sub>n</sub> |
+
+<div id="links">
+  ## Links
+</div>
+
+Links helfen Nutzerinnen und Nutzern, zwischen Seiten zu navigieren und auf externe Ressourcen zuzugreifen. Verwenden Sie aussagekräftige Linktexte, um die Barrierefreiheit und das Nutzererlebnis zu verbessern.
+
+<div id="internal-links">
+  ### Interne Links
+</div>
+
+Verlinken Sie auf andere Seiten in Ihrer Dokumentation mithilfe von root-relativen Pfaden:
+
+```mdx
+[Schnellstart](/quickstart)
+[Schritte](/components/steps)
+```
+
+[Schnellstart](/de/quickstart)<br />
+[Schritte](/de/components/steps)
+
+<Note>
+  Vermeiden Sie relative Links wie `[page](../page)`, da sie langsamer laden und nicht so effektiv wie root-relative Links optimiert werden können.
+</Note>
+
+<div id="external-links">
+  ### Externe Links
+</div>
+
+Für externe Ressourcen die vollständige URL angeben:
+
+```mdx
+[Markdown-Leitfaden](https://www.markdownguide.org/)
+```
+
+[Markdown-Leitfaden](https://www.markdownguide.org/)
+
+<div id="broken-links">
+  ### Ungültige Links
+</div>
+
+Sie können Ihre Dokumentation mit der [CLI](/de/installation) auf ungültige Links prüfen:
+
+```bash
+mint broken-links
+```
+
+<div id="blockquotes">
+  ## Blockquotes
+</div>
+
+Blockquotes heben wichtige Info, Zitate oder Beispiele in deinen Inhalten hervor.
+
+<div id="single-line-blockquotes">
+  ### Einzeilige Blockzitate
+</div>
+
+Füge `>` vor den Text, um ein Blockzitat zu erstellen:
+
+```mdx
+> Dies ist ein Zitat, das sich vom Hauptinhalt abhebt.
+```
+
+> Dieses Zitat hebt sich vom Hauptinhalt ab.
+
+<div id="multi-line-blockquotes">
+  ### Mehrzeilige Blockzitate
+</div>
+
+Für längere Zitate oder mehrere Absätze:
+
+```mdx
+> Dies ist der erste Absatz eines mehrzeiligen Blockzitats.
+>
+> Dies ist der zweite Absatz, getrennt durch eine leere Zeile mit `>`.
+```
+
+> Dies ist der erste Absatz eines mehrzeiligen Blockzitats.
+>
+> Dies ist der zweite Absatz, getrennt durch eine Leerzeile mit `>`.
+
+<Tip>
+  Verwenden Sie Blockzitate sparsam, um ihre visuelle Wirkung und Aussagekraft zu erhalten. Ziehen Sie für Hinweise, Achtungen und andere Informationen [Callouts](/de/components/callouts) in Betracht.
+</Tip>
+
+<div id="mathematical-expressions">
+  ## Mathematische Ausdrücke
+</div>
+
+Wir unterstützen LaTeX zur Darstellung mathematischer Ausdrücke und Gleichungen.
+
+<div id="inline-math">
+  ### Inline-Mathematik
+</div>
+
+Verwenden Sie einfache Dollarzeichen („$“) für mathematische Ausdrücke im Fließtext:
+
+```mdx
+Der Satz des Pythagoras besagt, dass $(a^2 + b^2 = c^2)$ in einem rechtwinkligen Dreieck gilt.
+```
+
+Der Satz des Pythagoras besagt, dass $(a^2 + b^2 = c^2)$ in einem rechtwinkligen Dreieck gilt.
+
+<div id="block-equations">
+  ### Blockgleichungen
+</div>
+
+Verwenden Sie doppelte Dollarzeichen (`$$`) für eigenständige Gleichungen:
+
+```mdx
+$$
+E = mc^2
+$$
+```
+
+$$
+E = mc^2
+$$
+
+<Info>
+  Für die LaTeX-Unterstützung ist eine korrekte mathematische Syntax erforderlich. Ausführliche Syntaxrichtlinien finden Sie in der [LaTeX-Dokumentation](https://www.latex-project.org/help/documentation/).
+</Info>
+
+<div id="line-breaks-and-spacing">
+  ## Zeilenumbrüche und Abstände
+</div>
+
+Steuern Sie Abstände und Zeilenumbrüche, um die Lesbarkeit des Inhalts zu verbessern.
+
+<div id="paragraph-breaks">
+  ### Absatzumbrüche
+</div>
+
+Trennen Sie Absätze durch Leerzeilen:
+
+```mdx
+Dies ist der erste Absatz.
+
+Dies ist der zweite Absatz, getrennt durch eine Leerzeile.
+```
+
+Dies ist der erste Absatz.
+
+Dies ist der zweite Absatz, durch eine Leerzeile getrennt.
+
+<div id="manual-line-breaks">
+  ### Manuelle Zeilenumbrüche
+</div>
+
+Verwenden Sie HTML-`<br />`-Tags, um innerhalb von Absätzen einen Zeilenumbruch zu erzwingen:
+
+```mdx
+Diese Zeile endet hier.<br />
+Diese Zeile beginnt in einer neuen Zeile.
+```
+
+Diese Zeile endet hier.<br />
+Diese Zeile beginnt in einer neuen Zeile.
+
+<Tip>
+  In den meisten Fällen sorgen Absatzumbrüche mit Leerzeilen für eine bessere Lesbarkeit als manuelle Zeilenumbrüche.
+</Tip>
+
+<div id="best-practices">
+  ## Bewährte Methoden
+</div>
+
+<div id="content-organization">
+  ### Inhaltsorganisation
+</div>
+
+* Verwenden Sie Überschriften, um eine klare Inhalts­hierarchie zu erstellen
+* Befolgen Sie die korrekte Überschriften­hierarchie (springen Sie nicht von H2 direkt zu H4)
+* Schreiben Sie aussagekräftige Überschriften mit relevanten Keywords
+
+<div id="text-formatting">
+  ### Textformatierung
+</div>
+
+* Verwenden Sie Fettschrift für Hervorhebungen, nicht für ganze Absätze
+* Setzen Sie Kursivschrift für Begriffe, Titel oder subtile Hervorhebungen ein
+* Vermeiden Sie übermäßige Formatierung, die vom Inhalt ablenkt
+
+<div id="links">
+  ### Links
+</div>
+
+* Verwenden Sie beschreibenden Linktext statt „Hier klicken“ oder „Mehr lesen“
+* Verwenden Sie dokumentwurzelrelative Pfade für interne Links
+* Testen Sie Links regelmäßig, um defekte Verweise zu vermeiden

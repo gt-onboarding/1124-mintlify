@@ -1,0 +1,79 @@
+---
+title: "Änderungen veröffentlichen"
+description: "Stellen Sie Ihre Dokumentationsupdates direkt in Produktion bereit oder über Pull Requests"
+---
+
+Wie Ihre Änderungen veröffentlicht werden, hängt davon ab, an welchem Branch Sie arbeiten:
+
+* **Deployment-Branch**: Veröffentlichen aktualisiert Ihre Live‑Site sofort.
+* **Andere Branches**: Veröffentlichen erstellt einen Pull Request, damit Sie Änderungen prüfen können, bevor sie in Produktion bereitgestellt werden.
+
+<Frame>
+  <img 
+    src="/images/editor/publish-flow-light.png" 
+    alt="Die Schaltfläche „Veröffentlichen“ im Mintlify Webeditor hervorgehoben" 
+    className="block dark:hidden" 
+  />
+  <img 
+    src="/images/editor/publish-flow-dark.png" 
+    alt="Die Schaltfläche „Veröffentlichen“ im Mintlify Webeditor hervorgehoben" 
+    className="hidden dark:block" 
+  />
+</Frame>
+
+<div id="pull-requests-and-reviewing-changes">
+  ## Pull Requests und Änderungen überprüfen
+</div>
+
+Pull Requests ermöglichen es dir, Änderungen aus deinem Branch vorzuschlagen, damit andere sie prüfen können, bevor sie in deine Live-Dokumentation gemerged werden. Das hilft sicherzustellen, dass deine Änderungen korrekt sind, und gibt deinem Team die Möglichkeit, gemeinsam am Inhalt zu arbeiten.
+
+<Tip>
+  Selbst wenn du allein arbeitest, sind Pull Requests hilfreich, um Änderungen vorab zu prüfen und eine klare Update-Historie zu behalten.
+</Tip>
+
+<div id="creating-a-pull-request">
+  ### Einen Pull Request erstellen
+</div>
+
+<Steps>
+  <Step title="Arbeit speichern">
+    Stelle sicher, dass alle deine Änderungen in deinem Branch mit **Änderungen speichern** gesichert sind.
+  </Step>
+  <Step title="Pull Request erstellen">
+    Wähle **Publish Pull Request** oben rechts im Editor.
+  </Step>
+  <Step title="Titel und Beschreibung hinzufügen">
+    Schreibe einen klaren Titel und eine Beschreibung, die Folgendes erläutern:
+    - Welche Änderungen du vorgenommen hast
+    - Warum du sie vorgenommen hast
+    - Welche Bereiche speziell überprüft werden sollten
+  </Step>
+  <Step title="Erstellen und teilen">
+    Wähle **Publish Pull Request**. Der Editor stellt einen Link bereit, um deinen Pull Request anzusehen.
+
+  <Frame>
+  <img 
+    src="/images/editor/pull-request-light.png" 
+    alt="Schaltfläche „Publish Pull Request“ im Mintlify Webeditor hervorgehoben" 
+    className="block dark:hidden" 
+  />
+  <img 
+    src="/images/editor/pull-request-dark.png" 
+    alt="Schaltfläche „Publish Pull Request“ im Mintlify Webeditor hervorgehoben" 
+    className="hidden dark:block" 
+  />
+  </Frame>
+  </Step>
+</Steps>
+
+<div id="reviewing-pull-requests">
+  ## Pull Requests überprüfen
+</div>
+
+Sobald Ihr Pull Request erstellt wurde:
+
+1. **Änderungen überprüfen**: Sie und Ihre Teammitglieder können Ihren Pull Request in Ihrem Git-Anbieter wie GitHub oder GitLab überprüfen.
+2. **Feedback geben**: Fügen Sie Kommentare hinzu oder fordern Sie Änderungen an.
+3. **Weitere Änderungen vornehmen**: Nehmen Sie weitere Änderungen im Webeditor vor. Wenn Sie Änderungen speichern, pusht der Editor diese in Ihren Pull Request.
+4. **Genehmigen**: Genehmigen Sie den Pull Request, wenn Sie mit den Änderungen zufrieden sind.
+5. **Mergen**: Mer­gen Sie den Pull Request, wenn Sie bereit sind, Ihre Änderungen in die Produktion zu deployen.

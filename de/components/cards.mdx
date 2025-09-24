@@ -1,0 +1,146 @@
+---
+title: "Cards"
+description: "Hervorheben zentraler Punkte oder Links mit anpassbaren Layouts und Icons"
+icon: "square-mouse-pointer"
+---
+
+import IconsOptional from "/snippets/de/icons-optional.mdx";
+
+Verwenden Sie Karten, um visuelle Container für Inhalte zu erstellen. Karten sind flexible Container, die Text, Icons, Bilder und Links enthalten können.
+
+<div id="basic-card">
+  ## Basis-Karte
+</div>
+
+<Card title="Kartentitel" icon="text" href="/de/components/columns">
+  So verwenden Sie eine Karte mit einem Icon und einem Link. Ein Klick auf diese Karte
+  führt Sie zur Seite „Columns“.
+</Card>
+
+```mdx Card example
+<Card title="Kartentitel" icon="text" href="/components/columns">
+  So verwenden Sie eine Karte mit einem Icon und einem Link. Ein Klick auf diese Karte
+  führt Sie zur Columns-Seite.
+</Card>
+```
+
+<div id="card-variations">
+  ## Kartenvarianten
+</div>
+
+Karten bieten mehrere Layout- und Stylingoptionen, um verschiedene Inhaltsanforderungen zu erfüllen.
+
+<div id="horizontal-layout">
+  ### Horizontales Layout
+</div>
+
+Fügen Sie die Eigenschaft `horizontal` hinzu, um Karten in einem kompakteren, horizontalen Layout darzustellen.
+
+<Card title="Horizontale Karte" icon="text" horizontal>
+  Dies ist ein Beispiel für eine horizontale Karte.
+</Card>
+
+```mdx Horizontal card example
+<Card title="Horizontale Karte" icon="text" horizontal>
+  Dies ist ein Beispiel für eine horizontale Karte.
+</Card>
+```
+
+<div id="image-cards">
+  ### Bildkarten
+</div>
+
+Fügen Sie die Eigenschaft `img` hinzu, um ein Bild oben auf der Karte anzuzeigen.
+
+<Card title="Bildkarte" img="https://mintlify-assets.b-cdn.net/yosemite.jpg">
+  Dies ist ein Beispiel für eine Karte mit Bild.
+</Card>
+
+```mdx Image card example
+<Card title="Bildkarte" img="/images/card-with-image.png">
+  Dies ist ein Beispiel einer Karte mit einem Bild.
+</Card>
+```
+
+<div id="link-cards-with-custom-ctas">
+  ### Link-Karten mit benutzerdefinierten CTAs
+</div>
+
+Sie können den Call-to-Action-Text anpassen und festlegen, ob ein Pfeil angezeigt wird. Standardmäßig werden Pfeile nur bei externen Links eingeblendet.
+
+<Card title="Link card" icon="link" href="/de/components/columns" arrow="true" cta="Hier klicken">
+  Dies ist ein Beispiel für eine Karte mit einem Icon und einem Link. Ein Klick auf diese Karte führt Sie zur Seite „Columns“.
+</Card>
+
+```mdx Link card example
+<Card
+  title="Link-Karte"
+  icon="link"
+  href="/components/columns"
+  arrow="true"
+  cta="Hier klicken"
+>
+  Dies ist ein Beispiel für eine Karte mit einem Icon und einem Link. Durch Klicken auf diese Karte gelangen Sie zur Columns-Seite.
+</Card>
+```
+
+<div id="grouping-cards">
+  ## Karten gruppieren
+</div>
+
+Verwenden Sie die [Columns-Komponente](/de/components/columns), um mehrere Karten nebeneinander anzuordnen.
+
+<Columns cols={2}>
+  <Card title="First card" icon="panel-left-close">
+    Dies ist die erste Karte.
+  </Card>
+
+  <Card title="Second card" icon="panel-right-close">
+    Dies ist die zweite Karte.
+  </Card>
+</Columns>
+
+```mdx Columns example
+<Columns cols={2}>
+  <Card title="Erste Karte" icon="panel-left-close">
+    Das ist die erste Karte.
+  </Card>
+  <Card title="Zweite Karte" icon="panel-right-close">
+    Das ist die zweite Karte.
+  </Card>
+</Columns>
+```
+
+<div id="properties">
+  ## Eigenschaften
+</div>
+
+<ResponseField name="title" type="string" required>
+  Der auf der Karte angezeigte Titel
+</ResponseField>
+
+<IconsOptional />
+
+<ResponseField name="color" type="string">
+  Icon-Farbe als Hex-Code (zum Beispiel „#FF6B6B“).
+</ResponseField>
+
+<ResponseField name="href" type="string">
+  URL, zu der navigiert wird, wenn die Karte angeklickt wird.
+</ResponseField>
+
+<ResponseField name="horizontal" type="boolean">
+  Karte in einer kompakten, horizontalen Darstellung anzeigen.
+</ResponseField>
+
+<ResponseField name="img" type="string">
+  URL oder lokaler Pfad zu einem Bild oben auf der Karte.
+</ResponseField>
+
+<ResponseField name="cta" type="string">
+  Individueller Text für die Aktionsschaltfläche.
+</ResponseField>
+
+<ResponseField name="arrow" type="boolean">
+  Link-Pfeil-Icon ein- oder ausblenden.
+</ResponseField>

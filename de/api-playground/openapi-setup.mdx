@@ -1,0 +1,577 @@
+---
+title: "OpenAPI-Einrichtung"
+description: "Referenzieren Sie OpenAPI-Endpoints in Ihren Seiten"
+icon: "file-json"
+---
+
+OpenAPI ist eine Spezifikation zur Beschreibung von APIs. Mintlify unterstützt OpenAPI-3.0+-Dokumente, um interaktive API-Dokumentation zu erzeugen und sie stets aktuell zu halten.
+
+<div id="add-an-openapi-specification-file">
+  ## Eine OpenAPI-Spezifikationsdatei hinzufügen
+</div>
+
+Um Ihre Endpoints mit OpenAPI zu dokumentieren, benötigen Sie ein gültiges OpenAPI-Dokument im JSON- oder YAML-Format, das der [OpenAPI-Spezifikation 3.0+](https://swagger.io/specification/) entspricht.
+
+Sie können API-Seiten aus einem einzelnen oder aus mehreren OpenAPI-Dokumenten erstellen.
+
+<div id="describing-your-api">
+  ### Ihre API beschreiben
+</div>
+
+Wir empfehlen die folgenden Ressourcen, um sich über OpenAPI-Dokumente zu informieren und diese zu erstellen.
+
+* [Swaggers OpenAPI-Leitfaden](https://swagger.io/docs/specification/v3_0/basic-structure/), um die OpenAPI-Syntax zu erlernen.
+* [Die Markdown-Quellen der OpenAPI-Spezifikation](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/), um Details der neuesten OpenAPI-Spezifikation nachzuschlagen.
+* [Swagger Editor](https://editor.swagger.io/), um Ihr OpenAPI-Dokument zu bearbeiten, zu validieren und zu debuggen.
+* [Die Mint CLI](https://www.npmjs.com/package/mint), um Ihr OpenAPI-Dokument mit folgendem Befehl zu validieren: `mint openapi-check <openapiFilenameOrUrl>`.
+
+<Note>
+  Swaggers OpenAPI-Leitfaden bezieht sich auf OpenAPI v3.0, aber nahezu alle
+  Informationen sind auch auf v3.1 anwendbar. Weitere Informationen zu den
+  Unterschieden zwischen v3.0 und v3.1 finden Sie im Beitrag [Migrating from OpenAPI 3.0 to
+  3.1.0](https://www.openapis.org/blog/2021/02/16/migrating-from-openapi-3-0-to-3-1-0)
+  im OpenAPI-Blog.
+</Note>
+
+<div id="specifying-the-url-for-your-api">
+  ### Die URL für Ihre API angeben
+</div>
+
+Um Mintlify‑Funktionen wie den API Playground zu aktivieren, fügen Sie Ihrem OpenAPI‑Dokument ein `servers`-Feld mit der Basis‑URL Ihrer API hinzu.
+
+```json
+{
+  "servers": [
+    {
+      "url": "https://api.example.com/v1"
+    }
+  ]
+}
+```
+
+In einem OpenAPI-Dokument werden verschiedene API-Endpoints über ihre Pfade definiert, etwa `/users/{id}` oder einfach `/`. Die Basis-URL legt fest, wo diese Pfade angehängt werden. Weitere Informationen zur Konfiguration des `servers`-Felds finden Sie unter [API Server and Base Path](https://swagger.io/docs/specification/api-host-and-base-path/) in der OpenAPI-Dokumentation.
+
+Der API playground verwendet diese Server-URLs, um zu bestimmen, wohin Anfragen gesendet werden. Wenn Sie mehrere Server angeben, ermöglicht ein Dropdown-Menü den Nutzern, zwischen den Servern zu wechseln. Wenn Sie keinen Server angeben, verwendet der API playground den einfachen Modus, da ohne Basis-URL keine Anfragen gesendet werden können.
+
+Wenn Ihre API Endpoints hat, die unter verschiedenen URLs verfügbar sind, können Sie [das Server-Feld überschreiben](https://swagger.io/docs/specification/v3_0/api-host-and-base-path/#overriding-servers) – für einen bestimmten Pfad oder eine bestimmte Operation.
+
+<div id="specifying-authentication">
+  ### Authentifizierung festlegen
+</div>
+
+Um die Authentifizierung in Ihrer API-Dokumentation und im Playground zu aktivieren, konfigurieren Sie die Felder `securitySchemes` und `security` in Ihrem OpenAPI-Dokument. Die API-Beschreibungen und der API Playground fügen basierend auf den Sicherheitskonfigurationen in Ihrem OpenAPI-Dokument Authentifizierungsfelder hinzu.
+
+<Steps>
+  <Step title="Define your authentication method.">
+    Fügen Sie ein `securitySchemes`-Feld hinzu, um festzulegen, wie sich Nutzer authentifizieren.
+
+    Dieses Beispiel zeigt eine Konfiguration für Bearer-Authentifizierung.
+
+    ```json
+    {
+      "components": {
+        "securitySchemes": {
+          "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer"
+          }
+        }
+      }
+    }
+    ```
+  </Step>
+
+  <Step title="Apply authentication to your endpoints.">
+    Fügen Sie ein `security`-Feld hinzu, um Authentifizierung zu erzwingen.
+
+    ```json
+    {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ]
+    }
+    ```
+  </Step>
+</Steps>
+
+Häufige Authentifizierungstypen sind:
+
+* [API Keys](https://swagger.io/docs/specification/authentication/api-keys/): Für Header-, Query- oder Cookie-basierte Keys.
+* [Bearer](https://swagger.io/docs/specification/authentication/bearer-authentication/): Für JWT (JSON Web Token) oder OAuth-Tokens.
+* [Basic](https://swagger.io/docs/specification/authentication/basic-authentication/): Für Benutzername und Passwort.
+
+Wenn unterschiedliche Endpoints innerhalb Ihrer API unterschiedliche Authentifizierungsmethoden benötigen, können Sie für eine bestimmte Operation [das Feld `security` überschreiben](https://swagger.io/docs/specification/authentication/#:~:text=you%20can%20apply%20them%20to%20the%20whole%20API%20or%20individual%20operations%20by%20adding%20the%20security%20section%20on%20the%20root%20level%20or%20operation%20level%2C%20respectively.).
+
+Weitere Informationen zum Definieren und Anwenden der Authentifizierung finden Sie unter [Authentication](https://swagger.io/docs/specification/authentication/) in der OpenAPI-Dokumentation.
+
+<div id="x-mint-extension">
+  ## `x-mint`-Erweiterung
+</div>
+
+Die `x-mint`-Erweiterung ist eine eigene OpenAPI-Erweiterung, die Ihnen mehr Kontrolle darüber gibt, wie Ihre API-Dokumentation erstellt und dargestellt wird.
+
+<div id="metadata">
+  ### Metadaten
+</div>
+
+Überschreiben Sie die Standardmetadaten für generierte API-Seiten, indem Sie `x-mint: metadata` zu einer beliebigen Operation hinzufügen. Sie können jedes Metadatenfeld verwenden, das im `MDX`-Frontmatter gültig ist – mit Ausnahme von `openapi`:
+
+```json {7-13}
+{
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Benutzer abrufen",
+        "description": "Eine Liste von Benutzern abrufen",
+        "x-mint": {
+          "metadata": {
+            "title": "Alle Benutzer auflisten",
+            "description": "Paginierte Benutzerdaten mit Filteroptionen abrufen",
+            "og:title": "Eine Liste von Benutzern anzeigen"
+          }
+        },
+        "parameters": [
+          {
+            // Parameterkonfiguration
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+<div id="content">
+  ### Inhalte
+</div>
+
+Fügen Sie vor der automatisch generierten API-Dokumentation mithilfe von `x-mint: content` Inhalte hinzu:
+
+```json {6-8}
+{
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Benutzer erstellen",
+        "x-mint": {
+          "content": "## Voraussetzungen\n\nDieser Endpoint erfordert Administratorrechte und unterliegt einer Ratenbegrenzung.\n\n<Note>Benutzer-E-Mail-Adressen müssen systemweit eindeutig sein.</Note>"
+        },
+        "parameters": [
+          {
+            // Parameterkonfiguration
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+Die Erweiterung `content` unterstützt alle Mintlify-MDX-Komponenten und -Formatierungen.
+
+<div id="href">
+  ### href
+</div>
+
+Ändern Sie die URL der Endpoint-Seite in Ihrer Dokumentation mit `x-mint: href`:
+
+```json {6-8, 14-16}
+{
+  "paths": {
+    "/legacy-endpoint": {
+      "get": {
+        "summary": "Veralteter Endpoint",
+        "x-mint": {
+          "href": "/deprecated-endpoints/legacy-endpoint"
+        }
+      }
+    },
+    "/documented-elsewhere": {
+      "post": {
+        "summary": "Spezieller Endpoint",
+        "x-mint": {
+          "href": "/guides/special-endpoint-guide"
+        }
+      }
+    }
+  }
+}
+```
+
+Wenn `x-mint: href` vorhanden ist, verweist der Navigationseintrag direkt auf die angegebene URL, statt eine API-Seite zu generieren.
+
+<div id="mcp">
+  ### MCP
+</div>
+
+Endpoints selektiv als Model Context Protocol (MCP)-Tools bereitstellen, indem Sie `x-mint: mcp` verwenden. Aktivieren Sie nur Endpoints, die für den öffentlichen Zugriff über KI-Tools sicher sind.
+
+<ResponseField name="mcp" type="object">
+  Die MCP-Konfiguration für den Endpoint.
+
+  <Expandable title="MCP">
+    <ResponseField name="enabled" type="boolean">
+      Ob der Endpoint als MCP-Tool bereitgestellt wird. Hat Vorrang vor der Konfiguration auf Datei-Ebene.
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Der Name des MCP-Tools.
+    </ResponseField>
+
+    <ResponseField name="description" type="string">
+      Die Beschreibung des MCP-Tools.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<CodeGroup>
+  ```json Selective enablement {6-9} wrap
+  {
+    "paths": {
+      "/users": {
+        "post": {
+          "summary": "Create user",
+          "x-mint": {
+            "mcp": {
+              "enabled": true
+            },
+            // ...
+          }
+        }
+      },
+      "/users": {
+        "delete": {
+          "summary": "Delete user (admin only)",
+          // No `x-mint: mcp` so this endpoint is not exposed as an MCP tool
+          // ...
+        }
+      }
+    }
+  }
+  ```
+
+  ```json Global enablement {3-5, 9-13} wrap
+  {
+    "openapi": "3.1.0",
+    "x-mcp": {
+        "enabled": true // All endpoints are exposed as MCP tools by default
+      },
+    "paths": {
+      "/api/admin/delete": {
+        "delete": {
+          "x-mint": {
+            "mcp": {
+              "enabled": false // Disable MCP for this endpoint
+            }
+          },
+          "summary": "Delete resources"
+        }
+      }
+    }
+  }
+  ```
+</CodeGroup>
+
+Weitere Informationen finden Sie unter [Model Context Protocol](/de/ai/model-context-protocol).
+
+<div id="auto-populate-api-pages">
+  ## API-Seiten automatisch befüllen
+</div>
+
+Fügen Sie einem Navigationselement in Ihrer `docs.json` ein `openapi`-Feld hinzu, um Seiten für OpenAPI-Endpoints automatisch zu generieren. Sie können steuern, wo diese Seiten in Ihrer Navigation erscheinen – entweder als eigene API-Bereiche oder zusammen mit anderen Seiten.
+
+Das `openapi`-Feld akzeptiert entweder einen Dateipfad in Ihrem Docs-Repository oder eine URL zu einem gehosteten OpenAPI-Dokument.
+
+Generierte Endpoint-Seiten haben folgende Standard-Metadatenwerte:
+
+* `title`: Das `summary`-Feld der Operation, falls vorhanden. Wenn kein `summary` vorhanden ist, wird der Titel aus der HTTP-Methode und dem Endpoint generiert.
+* `description`: Das `description`-Feld der Operation, falls vorhanden.
+* `version`: Der `version`-Wert vom übergeordneten Anker oder Registrieren, falls vorhanden.
+* `deprecated`: Das `deprecated`-Feld der Operation. Wenn `true`, erscheint eine veraltet Bezeichnung neben dem Endpoint-Titel in der Seitennavigation und auf der Endpoint-Seite.
+
+<Tip>
+  Um bestimmte Endpoints von Ihren automatisch generierten API-Seiten auszuschließen, fügen Sie der Operation in Ihrer OpenAPI-Spezifikation die
+  [x-hidden](/de/api-playground/customization/managing-page-visibility#x-hidden)
+  Eigenschaft hinzu.
+</Tip>
+
+Es gibt zwei Ansätze, um Endpoint-Seiten in Ihre Dokumentation aufzunehmen:
+
+1. **Eigene API-Bereiche**: Verweisen Sie in Navigationselementen auf OpenAPI-Spezifikationen für eigene API-Bereiche.
+2. **Ausgewählte Endpoints**: Verweisen Sie in Ihrer Navigation auf bestimmte Endpoints neben anderen Seiten.
+
+<div id="dedicated-api-sections">
+  ### Dedizierte API-Abschnitte
+</div>
+
+Erzeugen Sie dedizierte API-Abschnitte, indem Sie einem Navigationselement ein `openapi`-Feld hinzufügen und keine weiteren Seiten. Alle Endpoints in der Spezifikation werden aufgenommen:
+
+```json {5}
+"navigation": {
+  "tabs": [
+    {
+        "tab": "API-Referenz",
+        "openapi": "https://petstore3.swagger.io/api/v3/openapi.json"
+    }
+  ]
+}
+```
+
+Sie können mehrere OpenAPI-Spezifikationen in verschiedenen Navigationsbereichen verwenden:
+
+```json {8-11, 15-18}
+"navigation": {
+  "tabs": [
+    {
+      "tab": "API-Referenz",
+      "groups": [
+        {
+          "group": "Benutzer",
+          "openapi": {
+            "source": "/path/to/openapi-1.json",
+            "directory": "api-reference"
+          }
+        },
+        {
+          "group": "Admin",
+          "openapi": {
+            "source": "/path/to/openapi-2.json",
+            "directory": "api-reference"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+<Note>
+  Das Feld `directory` ist optional und legt fest, wo generierte API-Seiten in deinem Docs-Repo
+  gespeichert werden. Wenn nicht angegeben, wird standardmäßig das Verzeichnis `api-reference`
+  deines Repos verwendet.
+</Note>
+
+<div id="selective-endpoints">
+  ### Selektive Endpoints
+</div>
+
+Wenn Sie genauer steuern möchten, wo Endpoints in Ihrer Dokumentation erscheinen, können Sie in der Navigation gezielt auf bestimmte Endpoints verweisen. Dieser Ansatz ermöglicht es, Seiten für API-Endpoints zusammen mit anderen Inhalten zu generieren.
+
+<div id="set-a-default-openapi-spec">
+  #### Standard-OpenAPI-Spezifikation festlegen
+</div>
+
+Konfigurieren Sie eine Standard-OpenAPI-Spezifikation für ein Navigationselement. Referenzieren Sie anschließend bestimmte Endpoints im Feld `pages`:
+
+```json {12, 15-16}
+"navigation": {
+  "tabs": [
+    {
+      "tab": "Erste Schritte",
+      "pages": [
+        "quickstart",
+        "installation"
+      ]
+    },
+    {
+      "tab": "API-Referenz",
+      "openapi": "/path/to/openapi.json",
+      "pages": [
+        "api-overview",
+        "GET /users",
+        "POST /users",
+        "guides/authentication"
+      ]
+    }
+  ]
+}
+```
+
+Jeder Seiteneintrag, der dem Format `METHOD /path` entspricht, generiert eine API-Seite für diesen Endpoint auf Basis der standardmäßigen OpenAPI-Spezifikation.
+
+<div id="openapi-spec-inheritance">
+  #### Vererbung von OpenAPI-Spezifikationen
+</div>
+
+OpenAPI-Spezifikationen werden entlang der Navigationshierarchie vererbt. Untergeordnete Navigationselemente übernehmen die OpenAPI-Spezifikation ihres übergeordneten Elements, sofern sie nicht eine eigene definieren:
+
+```json {3, 7-8, 11, 13-14}
+{
+  "group": "API-Referenz",
+  "openapi": "/path/to/openapi-v1.json",
+  "pages": [
+    "overview",
+    "authentication",
+    "GET /users",
+    "POST /users",
+    {
+      "group": "Orders",
+      "openapi": "/path/to/openapi-v2.json",
+      "pages": [
+        "GET /orders",
+        "POST /orders"
+      ]
+    }
+  ]
+}
+```
+
+<div id="individual-endpoints">
+  #### Einzelne Endpoints
+</div>
+
+Verweisen Sie auf bestimmte Endpoints, ohne eine Standard-OpenAPI-Spezifikation festzulegen, indem Sie den Dateipfad angeben:
+
+```json {5-6}
+"navigation": {
+  "pages": [
+    "introduction",
+    "user-guides",
+    "/path/to/openapi-v1.json POST /users",
+    "/path/to/openapi-v2.json GET /orders"
+  ]
+}
+```
+
+Dieser Ansatz ist sinnvoll, wenn Sie einzelne Endpoints aus verschiedenen Spezifikationen benötigen oder nur bestimmte Endpoints einbinden möchten.
+
+<div id="create-mdx-files-for-api-pages">
+  ## Erstellen Sie `MDX`-Dateien für API-Seiten
+</div>
+
+Um die Kontrolle über einzelne Endpoint-Seiten zu behalten, erstellen Sie `MDX`-Seiten für jede Operation. So können Sie Seitenmetadaten anpassen, Inhalte hinzufügen, bestimmte Operationen auslassen oder Seiten auf Seitenebene in Ihrer Navigation neu anordnen.
+
+Sehen Sie sich eine [Beispiel-MDX-OpenAPI-Seite von MindsDB](https://github.com/mindsdb/mindsdb/blob/main/docs/rest/databases/create-databases.mdx?plain=1) an und wie sie in der [Live-Dokumentation](https://docs.mindsdb.com/rest/databases/create-databases) erscheint.
+
+<div id="manually-specify-files">
+  ### Dateien manuell angeben
+</div>
+
+Erstellen Sie für jeden Endpoint eine `MDX`-Seite und geben Sie über das Feld `openapi` im Frontmatter an, welche OpenAPI-Operation angezeigt werden soll.
+
+Wenn Sie auf diese Weise auf eine OpenAPI-Operation verweisen, werden Name, Beschreibung, Parameter, Antworten und der API Playground automatisch aus Ihrem OpenAPI-Dokument generiert.
+
+Wenn Sie mehrere OpenAPI-Dateien haben, fügen Sie den Dateipfad in Ihre Referenz ein, um sicherzustellen, dass Mintlify das richtige OpenAPI-Dokument findet. Wenn Sie nur eine OpenAPI-Datei haben, erkennt Mintlify diese automatisch.
+
+<Note>
+  Dieser Ansatz funktioniert unabhängig davon, ob Sie in Ihrer Navigation eine
+  Standard-OpenAPI-Spezifikation festgelegt haben. Sie können auf jeden Endpoint
+  aus jeder OpenAPI-Spezifikation verweisen, indem Sie den Dateipfad im Frontmatter
+  angeben.
+</Note>
+
+Wenn Sie eine externe OpenAPI-Datei referenzieren möchten, fügen Sie die URL der Datei zu Ihrer `docs.json` hinzu.
+
+<CodeGroup>
+  ```mdx Example
+  ---
+  title: "Get users"
+  description: "Returns all plants from the system that the user has access to"
+  openapi: "/path/to/openapi-1.json GET /users"
+  deprecated: true
+  version: "1.0"
+  ---
+  ```
+
+  ```mdx Format
+  ---
+  title: "title of the page"
+  description: "description of the page"
+  openapi: openapi-file-path method path
+  deprecated: boolean (not required)
+  version: "version-string" (not required)
+  ---
+  ```
+</CodeGroup>
+
+<Note>
+  Methode und Pfad müssen exakt der Definition in Ihrer OpenAPI-Spezifikation
+  entsprechen. Wenn der Endpoint in der OpenAPI-Datei nicht existiert, bleibt
+  die Seite leer.
+</Note>
+
+<div id="autogenerate-mdx-files">
+  ### `MDX`-Dateien automatisch generieren
+</div>
+
+Verwenden Sie unseren Mintlify-[Scraper](https://www.npmjs.com/package/@mintlify/scraping), um `MDX`-Seiten für umfangreiche OpenAPI-Dokumente automatisch zu erstellen.
+
+<Note>
+  Ihr OpenAPI-Dokument muss gültig sein, sonst werden die Dateien nicht automatisch erstellt.
+</Note>
+
+Der Scraper erstellt:
+
+* Eine `MDX`-Seite für jede Operation im Feld `paths` Ihres OpenAPI-Dokuments.
+* Wenn Ihr OpenAPI-Dokument Version 3.1+ ist, eine `MDX`-Seite für jede Operation im Feld `webhooks` Ihres OpenAPI-Dokuments.
+* Ein Array von Navigationseinträgen, das Sie Ihrer `docs.json` hinzufügen können.
+
+<Steps>
+  <Step title="`MDX`-Dateien erstellen.">
+    ```bash
+    npx @mintlify/scraping@latest openapi-file <path-to-openapi-file>
+    ```
+  </Step>
+
+  <Step title="Einen Ausgabeordner angeben.">
+    ```bash
+    npx @mintlify/scraping@latest openapi-file <path-to-openapi-file> -o api-reference
+    ```
+
+    Fügen Sie die Option `-o` hinzu, um einen Ordner festzulegen, in den die Dateien geschrieben werden. Wenn kein Ordner angegeben ist, werden die Dateien im Arbeitsverzeichnis erstellt.
+  </Step>
+</Steps>
+
+<div id="create-mdx-files-for-openapi-schemas">
+  ### `MDX`-Dateien für OpenAPI-Schemas erstellen
+</div>
+
+Sie können einzelne Seiten für jedes OpenAPI-Schema erstellen, das im Feld `components.schema` eines OpenAPI-Dokuments definiert ist:
+
+<CodeGroup>
+  ```mdx Example
+  ---
+  openapi-schema: OrderItem
+  ---
+  ```
+
+  ```mdx Format
+  ---
+  openapi-schema: "schema-key"
+  ---
+  ```
+</CodeGroup>
+
+<div id="webhooks">
+  ## Webhooks
+</div>
+
+Webhooks sind HTTP-Callbacks, die Ihre API sendet, um externe Systeme bei Ereignissen zu benachrichtigen. Webhooks werden in OpenAPI-3.1+-Dokumenten unterstützt.
+
+<div id="define-webhooks-in-your-openapi-specification">
+  ### Webhooks in Ihrer OpenAPI-Spezifikation definieren
+</div>
+
+Fügen Sie Ihrem OpenAPI-Dokument neben dem Feld `paths` das Feld `webhooks` hinzu.
+
+Weitere Informationen zum Definieren von Webhooks finden Sie unter [Webhooks](https://spec.openapis.org/oas/v3.1.0#oasWebhooks) in der OpenAPI-Dokumentation.
+
+<div id="reference-webhooks-in-mdx-files">
+  ### Webhooks in MDX-Dateien referenzieren
+</div>
+
+Wenn Sie MDX-Seiten für Webhooks erstellen, verwenden Sie `webhook` statt HTTP-Methoden wie `GET` oder `POST`:
+
+```mdx
+---
+title: "Beispiel-Webhook"
+description: "Wird ausgelöst, wenn ein Ereignis auftritt"
+openapi: "path/to/openapi-file webhook example-webhook-name"
+---
+```
+
+<Note>
+  Der Webhook-Name muss exakt dem in dem `webhooks`-Feld Ihrer OpenAPI-Spezifikation definierten Schlüssel entsprechen.
+</Note>

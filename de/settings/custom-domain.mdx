@@ -1,0 +1,55 @@
+---
+title: "Eigene Domain"
+description: "Hosten Sie Ihre Dokumentation unter der eigenen Domain Ihrer Website"
+icon: "globe"
+---
+
+Um Ihre Dokumentation auf einer eigenen Domain einzurichten, legen Sie die gewünschte Domain in Ihren Mintlify-Einstellungen fest und konfigurieren Sie die DNS-Einstellungen bei Ihrem Domainanbieter.
+
+<Info>
+  Möchten Sie ein eigenes Unterverzeichnis wie `mintlify.com/docs` einrichten? Lesen Sie die Dokumentation zum [eigenen Unterverzeichnis](/de/advanced/subpath/cloudflare).
+</Info>
+
+<div id="dashboard-settings">
+  ## Dashboard-Einstellungen
+</div>
+
+1. Navigiere zu deinem [Dashboard](https://dashboard.mintlify.com)
+2. Wähle **Settings**
+3. Wähle **Domain Setup**
+4. Gib deine gewünschte eigene Domain ein, zum Beispiel `docs.mintlify.com`
+
+<Frame>
+  <img alt="Eigene Domain" className="block dark:hidden" src="/images/add-custom-domain-light.png" />
+
+  <img alt="Eigene Domain" className="hidden dark:block" src="/images/add-custom-domain-dark.png" />
+</Frame>
+
+<div id="configuring-your-dns">
+  ## DNS konfigurieren
+</div>
+
+1. Rufen Sie in der Website Ihres Domainanbieters die DNS-Einstellungen Ihrer Domain auf.
+2. Erstellen Sie einen neuen DNS-Eintrag und geben Sie die folgenden Werte ein:
+
+```bash
+CNAME | docs | cname.vercel-dns.com.
+```
+
+<Frame>
+  <img alt="DNS" src="https://mintlify-assets.b-cdn.net/mintlify-dns.png" />
+</Frame>
+
+<div id="provider-specific-settings">
+  ## Anbieterbezogene Einstellungen
+</div>
+
+<AccordionGroup>
+  <Accordion title="Vercel verification">
+    Wenn Vercel Ihr Domain-Anbieter ist, müssen Sie einen `TXT`-Verifizierungseintrag hinzufügen. Diese Informationen werden nach dem Hinzufügen Ihrer benutzerdefinierten Domain in Ihrem Dashboard angezeigt und Ihnen außerdem per E-Mail zugeschickt.
+  </Accordion>
+
+  <Accordion title="Cloudflare security settings">
+    Wenn Cloudflare Ihr DNS-Anbieter ist, müssen Sie für die HTTPS-Einstellung die Sicherheitsoption „Full (strict)“ aktivieren.
+  </Accordion>
+</AccordionGroup>

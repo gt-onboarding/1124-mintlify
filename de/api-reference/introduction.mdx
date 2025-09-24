@@ -1,0 +1,46 @@
+---
+title: "Einführung"
+description: "Updates auslösen, KI‑Assistent einbetten und mehr"
+icon: "book-open"
+---
+
+Die Mintlify REST API ermöglicht es Ihnen, programmgesteuert mit Ihrer Dokumentation zu interagieren, Updates auszulösen und KI‑gestützte Chat‑Erlebnisse einzubetten.
+
+<div id="endpoints">
+  ## Endpoints
+</div>
+
+* [Update auslösen](/de/api-reference/update/trigger): Lösen Sie bei Bedarf ein Update Ihrer Site aus.
+* [Update-Status abrufen](/de/api-reference/update/status): Rufen Sie den Status eines Updates und weitere Details zu Ihrer Dokumentation ab.
+* [Assistant-Nachricht generieren](/de/api-reference/assistant/create-assistant-message): Betten Sie den Assistant, der auf Ihrer Dokumentation trainiert wurde, in eine Anwendung Ihrer Wahl ein.
+* [Dokumentation durchsuchen](/de/api-reference/assistant/search): Durchsuchen Sie Ihre Dokumentation.
+
+<div id="authentication">
+  ## Anmeldung
+</div>
+
+Sie können einen API key über [das Dashboard](https://dashboard.mintlify.com/settings/organization/api-keys) generieren. API keys sind einer gesamten Organisation zugeordnet und können in mehreren Deployments verwendet werden.
+
+<div id="admin-api-key">
+  ### Admin-API-key
+</div>
+
+Der Admin-API-key wird für die Endpoints [Update auslösen](/de/api-reference/update/trigger) und [Update-Status abrufen](/de/api-reference/update/status) verwendet.
+
+Admin-API-keys beginnen mit dem Präfix `mint_`. Halten Sie Ihre Admin-API-keys geheim.
+
+<div id="assistant-api-key">
+  ### Assistant API key
+</div>
+
+Der Assistant API key wird für die Endpoints [Generate assistant message](/de/api-reference/assistant/create-assistant-message) und [Search documentation](/de/api-reference/assistant/search) verwendet.
+
+Assistant API keys beginnen mit dem Präfix `mint_dsc_`.
+
+Der Assistant API key ist ein serverseitiges Token, das geheim gehalten werden sollte.
+
+Das Assistant API token ist ein öffentliches Token, das in deinem Frontend-Code referenziert werden kann.
+
+<Note>
+  Aufrufe mit dem Assistant API token können Kosten verursachen: entweder durch Nutzung deiner KI‑Assistent‑Credits oder durch Überschreitungen.
+</Note>

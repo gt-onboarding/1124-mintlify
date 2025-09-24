@@ -1,0 +1,44 @@
+---
+title: "Frames"
+description: "Bilder oder andere Komponenten in einem Container einbetten"
+icon: "frame"
+---
+
+Verwenden Sie Frames, um Bilder, Diagramme oder andere visuelle Inhalte mit einheitlichem Styling und optionalen Bildunterschriften anzuzeigen. Frames zentrieren Inhalte und sorgen für eine klare visuelle Abgrenzung zum umgebenden Text.
+
+<Frame>
+  <img src="https://mintlify-assets.b-cdn.net/yellowstone.jpeg" alt="Foto eines von Bäumen umgebenen Sees mit Bergen in der Ferne im Yellowstone-Nationalpark." />
+</Frame>
+
+<div id="captions">
+  ## Bildunterschriften
+</div>
+
+Sie können einem Bild mit der optionalen `caption`-Prop zusätzlichen Kontext hinzufügen.
+
+<Frame caption="Den Yosemite-Nationalpark besuchen jedes Jahr über 3,5 Millionen Menschen">
+  <img src="https://mintlify-assets.b-cdn.net/yosemite.jpg" alt="Foto des Yosemite-Tals." />
+</Frame>
+
+<div id="properties">
+  ## Eigenschaften
+</div>
+
+<ResponseField name="caption" type="string">
+  Optionaler Bildunterschriftentext, der zentriert unter deiner Komponente angezeigt wird.
+</ResponseField>
+
+<CodeGroup>
+
+```mdx Frame
+<Frame>
+  <img src="/path/image.jpg" alt="Beschreibender alt-Text" />
+</Frame>
+```
+
+```mdx Frame with a caption
+<Frame caption="Beschriftungstext">
+  <img src="/path/image.jpg" alt="Beschreibender alt-Text" />
+</Frame>
+```
+</CodeGroup>

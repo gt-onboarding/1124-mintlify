@@ -1,0 +1,152 @@
+---
+title: "Windsurf"
+description: "Konfigurieren Sie Windsurf als Ihren Schreibassistenten"
+icon: "waves"
+---
+
+Machen Sie Windsurf mithilfe von Workspace-Regeln und Memories zu einer Dokumentationsexpertin, die Ihren Styleguide, Ihre Komponenten und den Kontext Ihres Projekts versteht.
+
+<div id="using-windsurf-with-mintlify">
+  ## Verwendung von Windsurf mit Mintlify
+</div>
+
+Der Cascade‑KI‑Assistent von Windsurf lässt sich so konfigurieren, dass er mithilfe von Mintlify‑Komponenten Dokumentation nach Ihren Standards erstellt. Arbeitsbereichsregeln und Memories liefern dauerhaften Kontext zu Ihrem Projekt und sorgen für konsistentere Vorschläge von Cascade.
+
+* **Arbeitsbereichsregeln** werden in Ihrem Dokumentations‑Repository gespeichert und mit Ihrem Team geteilt.
+* **Memories** liefern individuellen Kontext, der sich im Laufe der Zeit aufbaut.
+
+Wir empfehlen, Arbeitsbereichsregeln für gemeinsame Dokumentationsstandards einzurichten. Sie können Memories im Laufe der Arbeit aufbauen; da sie jedoch nicht geteilt werden, sind sie nicht zwischen Teammitgliedern konsistent.
+
+Erstellen Sie Arbeitsbereichsregeln im Verzeichnis `.windsurf/rules` Ihres Docs‑Repos. Weitere Informationen finden Sie unter [Memories & Rules](https://docs.windsurf.com/windsurf/cascade/memories) in der Windsurf‑Dokumentation.
+
+<div id="example-workspace-rule">
+  ## Beispielarbeitsbereichsregel
+</div>
+
+Diese Regel liefert Cascade Kontext zu Mintlify-Komponenten sowie allgemeinen Best Practices für technisches Schreiben.
+
+Sie können diese Beispielregel unverändert verwenden oder für Ihre Dokumentation anpassen:
+
+* **Schreibstandards**: Aktualisieren Sie die Sprachrichtlinien, damit sie zu Ihrem Styleguide passen.
+* **Komponentenpatterns**: Fügen Sie projektspezifische Komponenten hinzu oder passen Sie bestehende Beispiele an.
+* **Codebeispiele**: Ersetzen Sie generische Beispiele durch echte API-Aufrufe und -Antworten für Ihr Produkt.
+* **Stil- und Tonpräferenzen**: Passen Sie Terminologie, Formatierung und andere Regeln an.
+
+Speichern Sie Ihre Regel als `.md`-Datei im Verzeichnis `.windsurf/rules` Ihres Docs-Repos.
+
+````mdx
+# Mintlify Regel für technisches Schreiben
+
+## Projektkontext
+
+- Dies ist ein Dokumentationsprojekt auf der Mintlify-Plattform
+- Wir verwenden MDX-Dateien mit YAML-Frontmatter  
+- Die Navigation wird in `docs.json` konfiguriert
+- Wir befolgen bewährte Praktiken für technisches Schreiben
+
+## Schreibstandards
+
+- Verwenden Sie die zweite Person („Sie") für Anweisungen
+- Schreiben Sie im Aktiv und Präsens
+- Beginnen Sie Verfahren mit Voraussetzungen
+- Geben Sie erwartete Ergebnisse für wichtige Schritte an
+- Verwenden Sie beschreibende, schlüsselwortreiche Überschriften
+- Halten Sie Sätze prägnant aber informativ
+
+## Erforderliche Seitenstruktur
+
+Jede Seite muss mit Frontmatter beginnen:
+
+```yaml
+---
+title: „Klarer, spezifischer Titel"
+description: „Prägnante Beschreibung für SEO und Navigation"
+---
+```
+
+## Mintlify-Komponenten
+
+### docs.json
+
+- Beziehen Sie sich auf das [docs.json-Schema](https://mintlify.com/docs.json) beim Erstellen der docs.json-Datei und der Website-Navigation
+
+### Hinweiskästen
+
+- `<Note>` für hilfreiche ergänzende Informationen
+- `<Warning>` für wichtige Warnungen und Breaking Changes
+- `<Tip>` für bewährte Praktiken und Expertenratschläge  
+- `<Info>` für neutrale kontextuelle Informationen
+- `<Check>` für Erfolgsbestätigungen
+
+### Codebeispiele
+
+- Fügen Sie bei Bedarf vollständige, ausführbare Beispiele hinzu
+- Verwenden Sie `<CodeGroup>` für Beispiele in mehreren Sprachen
+- Geben Sie Sprach-Tags für alle Codeblöcke an
+- Verwenden Sie realistische Daten, keine Platzhalter
+- Verwenden Sie `<RequestExample>` und `<ResponseExample>` für API-Dokumentation
+
+### Verfahren
+
+- Verwenden Sie die `<Steps>`-Komponente für sequenzielle Anweisungen
+- Fügen Sie Verifizierungsschritte mit `<Check>`-Komponenten hinzu, wenn relevant
+- Unterteilen Sie komplexe Verfahren in kleinere Schritte
+
+### Inhaltsorganisation
+
+- Verwenden Sie `<Tabs>` für plattformspezifische Inhalte
+- Verwenden Sie `<Accordion>` für progressive Offenlegung
+- Verwenden Sie `<Card>` und `<CardGroup>` zum Hervorheben von Inhalten
+- Umhüllen Sie Bilder mit `<Frame>`-Komponenten mit beschreibendem alt-Text
+
+## API-Dokumentationsanforderungen
+
+- Dokumentieren Sie alle Parameter mit `<ParamField>` 
+- Zeigen Sie die Antwortstruktur mit `<ResponseField>`
+- Fügen Sie sowohl Erfolgs- als auch Fehlerbeispiele hinzu
+- Verwenden Sie `<Expandable>` für verschachtelte Objekteigenschaften
+- Fügen Sie immer Authentifizierungsbeispiele hinzu
+
+## Qualitätsstandards
+
+- Testen Sie alle Codebeispiele vor der Veröffentlichung
+- Verwenden Sie relative Pfade für interne Links
+- Fügen Sie alt-Text für alle Bilder hinzu
+- Stellen Sie eine ordnungsgemäße Überschriftenhierarchie sicher (beginnen Sie mit h2)
+- Überprüfen Sie bestehende Muster auf Konsistenz
+````
+
+
+<div id="working-with-cascade">
+  ## Arbeiten mit Cascade
+</div>
+
+Sobald Ihre Regeln eingerichtet sind, können Sie Cascade zur Unterstützung verschiedener Dokumentationsaufgaben verwenden. Weitere Informationen finden Sie in der Windsurf-Dokumentation unter [Cascade](https://docs.windsurf.com/windsurf/cascade).
+
+<div id="example-prompts">
+  ### Beispiel‑Prompts
+</div>
+
+**Neue Inhalte schreiben**:
+
+```text wrap
+Erstellen Sie eine neue Seite, die erklärt, wie man sich mit unserer API authentifiziert. Fügen Sie Codebeispiele in JavaScript, Python und cURL hinzu.
+```
+
+**Verbesserung bestehender Inhalte**:
+
+```text wrap
+Überprüfen Sie diese Seite und schlagen Sie Verbesserungen für Klarheit und Komponentennutzung vor. Konzentrieren Sie sich darauf, die Schritte einfacher nachvollziehbar zu machen.
+```
+
+**Codebeispiele erstellen**:
+
+```text wrap
+Generiere ein vollständiges Codebeispiel, das die Fehlerbehandlung für diesen API-Endpoint zeigt. Verwende realistische Daten und füge erwartete Antworten hinzu.
+```
+
+**Konsistenz sicherstellen**:
+
+```text wrap
+Prüfen Sie, ob diese neue Seite unseren Dokumentationsstandards entspricht und schlagen Sie notwendige Änderungen vor.
+```

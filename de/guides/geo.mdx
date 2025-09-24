@@ -1,0 +1,125 @@
+---
+title: "GEO-Leitfaden: Dokus für KI-Suche und Antwort-Engines optimieren"
+sidebarTitle: "GEO"
+description: "Machen Sie Ihre Dokumentation besser auffindbar und häufiger von KI-Tools zitiert"
+icon: "cpu"
+---
+
+Optimieren Sie Ihre Dokumentation sowohl für klassische Suchmaschinen als auch für KI-gestützte Antwort-Engines wie ChatGPT, Perplexity und Google AI Overviews.
+
+Generative Engine Optimization (GEO) zielt darauf ab, durch umfassende Inhalte und strukturierte Informationen von KI-Systemen zitiert zu werden, während sich klassische SEO auf Platzierungen in den Suchergebnissen konzentriert.
+
+<div id="geo-quickstart">
+  ## GEO-Quickstart
+</div>
+
+<div id="initial-setup">
+  ### Erste Einrichtung
+</div>
+
+1. **Stellen Sie sicher, dass Ihre Dokumentation indiziert wird** in Ihren `docs.json`-Einstellungen
+2. **Überprüfen Sie aktuelle Seiten** auf fehlende Beschreibungen und Titel
+
+<div id="content-improvements">
+  ### Inhaltsverbesserungen
+</div>
+
+1. **Vergleichstabellen** auf geeigneten Seiten hinzufügen
+2. **Überschriften prüfen**, um sicherzustellen, dass sie gängige Fragen beantworten
+3. **Interne Verlinkungen** zwischen verwandten Themen verbessern
+4. **Mit KI‑Tools testen**, um die Genauigkeit zu verifizieren
+
+<div id="geo-best-practices">
+  ## GEO Best Practices
+</div>
+
+Im Allgemeinen hat gut geschriebene und klar strukturierte Dokumentation eine starke GEO. Sie sollten weiterhin für Ihre Nutzer schreiben, und wenn Ihre Inhalte deren Bedürfnisse erfüllen, sind Sie auf einem guten Weg zur Optimierung für KI-Tools. Das Erstellen wirklich hilfreicher Inhalte anstatt der Optimierung um der Optimierung willen wird sowohl von traditionellen als auch von KI-Suchmaschinen belohnt.
+
+Konzentrieren Sie sich auf:
+
+- Inhalte, die sich an den Bedürfnissen der Nutzer orientieren statt an Keyword-Matching
+- Strukturierte, leicht scannbare Informationen
+- Direkte Antworten auf Fragen
+
+<div id="format-for-clarity">
+  ### Format für klare Verständlichkeit
+</div>
+
+Diese Formatierungspraktiken helfen KI-Tools, deine Inhalte zu analysieren und zu verstehen:
+
+- Überschriftsebenen nicht überspringen (H1 → H2 → H3)
+- Konkrete Objektnamen statt „it“ oder „this“ verwenden
+- Code-Blocks mit ihrer Programmiersprache kennzeichnen
+- Bildern aussagekräftigen Objekt-Text geben
+- Auf verwandte Konzepte verlinken, um der KI das Verständnis von Zusammenhängen zu erleichtern
+
+<div id="answer-questions-directly">
+  ### Fragen direkt beantworten
+</div>
+
+Schreiben Sie Inhalte, die konkrete Nutzerfragen beantworten:
+
+- Beginnen Sie Abschnitte mit der wichtigsten Erkenntnis
+- Verwenden Sie aussagekräftige Überschriften, die gängigen Suchanfragen entsprechen
+- Teilen Sie komplexe Themen in nummerierte Schritte auf
+
+<div id="mintlify-configuration">
+  ## Mintlify-Konfiguration
+</div>
+
+Nutzen Sie diese Funktionen, um GEO zu verbessern.
+
+<div id="add-descriptive-page-metadata">
+  ### Beschreibende Seitenmetadaten hinzufügen
+</div>
+
+Fügen Sie in Ihrem Frontmatter eindeutige Titel und Beschreibungen hinzu:
+
+```mdx
+---
+title: "API-Authentifizierungs-Leitfaden"
+description: "Vollständiger Leitfaden zur Implementierung der API-Authentifizierung mit Codebeispielen"
+---
+```
+
+
+<div id="configure-global-indexing-settings">
+  ### Globale Indexierungseinstellungen konfigurieren
+</div>
+
+Fügen Sie Folgendes zu Ihrer `docs.json` hinzu:
+
+```json
+{
+  "seo": {
+    "indexing": "all",
+    "metatags": {
+      "og:type": "website",
+      "og:site_name": "Ihre Docs"
+    }
+  }
+}
+```
+
+
+<div id="llmstxt">
+  ### LLMs.txt
+</div>
+
+LLMs.txt-Dateien helfen KI-Systemen, die Struktur Ihrer Dokumentation zu verstehen – ähnlich wie Sitemaps Suchmaschinen unterstützen. Mintlify generiert LLMs.txt-Dateien für Ihre Dokumentation automatisch. Keine Konfiguration erforderlich.
+
+<div id="testing-your-documentation">
+  ## Testen Ihrer Dokumentation
+</div>
+
+Testen Sie verschiedene KI-Tools mit Fragen zu Ihrem Produkt und Ihrer Dokumentation, um zu sehen, wie gut Ihre Dokumentation zitiert wird.
+
+**Stellen Sie KI‑Assistenten gezielte Fragen zu Ihrer Dokumentation:**
+
+- „Wie richte ich die Authentifizierung mit dieser API ein?“
+- „Führen Sie mich Schritt für Schritt durch den Installationsprozess.“
+
+**Prüfen Sie, ob die Tools Folgendes liefern:**
+
+- Korrekte Codebeispiele
+- Präzise Schritt‑für‑Schritt‑Anleitungen

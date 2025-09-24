@@ -1,0 +1,94 @@
+---
+title: "GitLab"
+description: "Synchronisieren Sie Ihre Doku mit einem GitLab-Repository"
+icon: "gitlab"
+---
+
+Wir verwenden Zugriffstokens und Webhooks, um die Verbindung zwischen GitLab und Mintlify zu authentifizieren und Änderungen zu synchronisieren.
+
+- Mintlify verwendet Zugriffstokens, um Informationen aus GitLab abzurufen.
+- GitLab nutzt Webhooks, um Mintlify bei Änderungen zu benachrichtigen und so Preview-Deployments für Merge Requests zu ermöglichen.
+
+<div id="set-up-the-connection">
+  ## Verbindung einrichten
+</div>
+
+<Steps>
+  <Step title="Projekt-ID finden">
+    Navigieren Sie in Ihrem GitLab-Projekt zu **Settings** > **General** und suchen Sie Ihre **Project ID**.
+    <Frame>
+      <img src="/images/gitlab/gitlab-project-id.png" alt="Die Seite General Settings im GitLab-Dashboard. Die Project ID ist hervorgehoben." />
+    </Frame>
+  </Step>
+  <Step title="Zugriffstoken erstellen">
+    Navigieren Sie zu **Settings** > **Access Tokens** und wählen Sie **Add new token**.
+    
+    Konfigurieren Sie das Token mit folgenden Einstellungen:
+    - **Name**: Mintlify
+    - **Role**: Maintainer (erforderlich für private Repositories)
+    - **Scopes**: `api` und `read_api`
+    
+    Klicken Sie auf **Create project access token** und kopieren Sie das Token.
+
+    <Note>
+      Wenn Project Access Tokens nicht verfügbar sind, können Sie stattdessen ein Personal Access Token verwenden. Beachten Sie, dass Personal Access Tokens ablaufen und regelmäßig erneuert werden müssen.
+    </Note>
+
+    <Frame>
+      <img src="/images/gitlab/gitlab-project-access-token.png" alt="Die Seite Access Tokens im GitLab-Dashboard. Die für Mintlify zu konfigurierenden Einstellungen sind hervorgehoben." />
+    </Frame>
+
+  </Step>
+  <Step title="Verbindung einrichten">
+    Im [Mintlify-Dashboard](https://dashboard.mintlify.com/settings/deployment/git-settings):
+    1. Geben Sie Ihre Project ID und Ihr Access Token ein.
+    2. Nehmen Sie alle weiteren Pflichtkonfigurationen vor.
+    3. Klicken Sie auf **Änderungen speichern**.
+    <Frame>
+      <img src="/images/gitlab/gitlab-config.png" alt="Die Seite Git Settings im Mintlify-Dashboard. Die GitLab-Konfigurationseinstellungen sind hervorgehoben." />
+    </Frame>
+  </Step>
+</Steps>
+
+<div id="create-the-webhook">
+  ## Webhook erstellen
+</div>
+
+Webhooks ermöglichen es, Ereignisse bei Änderungen zu empfangen, sodass Deployments automatisch ausgelöst werden können.
+
+<Steps>
+  <Step title="Navigieren Sie zu Settings > Webhooks und klicken Sie auf „Add new Webhook“">
+    <Frame>
+      <img src="/images/gitlab/gitlab-webhook.png" />
+    </Frame>
+  </Step>
+  <Step title="URL und Webhook einrichten">
+    Geben Sie im Feld „URL“ den Endpoint `https://leaves.mintlify.com/gitlab-webhook` ein und benennen Sie den Webhook „Mintlify“.
+
+  </Step>
+  <Step title="Token einfügen">
+    Fügen Sie das Webhook-Token ein, das nach dem Einrichten der Verbindung generiert wurde.
+    <Frame>
+      <img src="/images/gitlab/gitlab-show-webtoken.png" />
+    </Frame>
+  </Step>
+  <Step title="Ereignisse auswählen">
+    Wählen Sie diese Ereignisse aus, um den Webhook auszulösen:
+    - **Push events** (alle Branches)
+    - **Merge requests events**
+      
+    Wenn Sie fertig sind, sollte es so aussehen:
+    <Frame>
+      <img src="/images/gitlab/gitlab-project-webtoken.png" alt="Die Webhook-Seite im GitLab Dashboard. Die für Mintlify zu konfigurierenden Einstellungen sind hervorgehoben." />
+    </Frame>
+  </Step>
+  <Step title="Webhook testen">
+    Nachdem Sie den Webhook erstellt haben, klicken Sie auf das Dropdown „Test“ und wählen Sie „Push events“, um eine Beispiel-Payload zu senden und sicherzustellen, dass alles korrekt konfiguriert ist. Bei korrekter Konfiguration erscheint „Hook executed successfully: HTTP 200“.
+
+    So können Sie prüfen, dass alles ordnungsgemäß funktioniert und Ihre Dokumentation korrekt mit Ihrem GitLab-Repository synchronisiert wird.
+    <Frame>
+      <img src="/images/gitlab/gitlab-project-webtoken-test.png" />
+    </Frame>
+
+  </Step>
+</Steps>

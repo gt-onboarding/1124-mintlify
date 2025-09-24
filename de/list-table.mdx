@@ -1,0 +1,92 @@
+---
+title: "Listen und Tabellen"
+description: "Informationen in Listen und Tabellen darstellen"
+icon: "list"
+---
+
+<div id="lists">
+  ## Listen
+</div>
+
+Listen verwenden die offizielle [Markdown-Syntax](https://www.markdownguide.org/basic-syntax/#lists-1).
+
+<div id="ordered-list">
+  ### Geordnete Liste
+</div>
+
+Um eine geordnete Liste zu erstellen, setzen Sie vor die Listeneinträge Zahlen gefolgt von einem Punkt.
+
+1. Erstes Element
+2. Zweites Element
+3. Drittes Element
+4. Viertes Element
+
+```mdx
+1. Erstes Element
+2. Zweites Element
+3. Drittes Element
+4. Viertes Element
+```
+
+
+<div id="unordered-list">
+  ### Ungeordnete Liste
+</div>
+
+Um eine ungeordnete Liste zu erstellen, fügen Sie Bindestriche (`-`), Sternchen (`*`) oder Pluszeichen (`+`) vor den Listeneinträgen ein.
+
+* Erster Eintrag
+* Zweiter Eintrag
+* Dritter Eintrag
+* Vierter Eintrag
+
+```mdx
+- Erstes Element
+- Zweites Element
+- Drittes Element
+- Viertes Element
+```
+
+
+<div id="nested-list">
+  ### Verschachtelte Liste
+</div>
+
+Rücken Sie Listenelemente ein, um sie zu verschachteln.
+
+* Erstes Element
+* Zweites Element
+  * Weiteres Element
+  * Weiteres Element
+* Drittes Element
+
+```mdx
+- Erstes Element
+- Zweites Element
+  - Zusätzliches Element
+  - Zusätzliches Element
+- Drittes Element
+```
+
+
+<div id="tables">
+  ## Tabellen
+</div>
+
+Tabellen folgen der offiziellen [Markdown-Syntax](https://www.markdownguide.org/extended-syntax/#tables).
+
+Um eine Tabelle hinzuzufügen, verwenden Sie drei oder mehr Bindestriche (`---`) für die Kopfzeilen jeder Spalte und Pipes (`|`), um die Spalten zu trennen. Für die Kompatibilität sollten Sie außerdem an beiden Enden jeder Zeile eine Pipe hinzufügen.
+
+| Eigenschaft | Beschreibung                         |
+| ----------- | ------------------------------------ |
+| Name        | Vollständiger Name des Nutzers       |
+| Age         | Angegebenes Alter                    |
+| Joined      | Ob der Nutzer der Community beigetreten ist |
+
+```mdx
+| Eigenschaft | Beschreibung                           |
+| -------- | ------------------------------------- |
+| Name     | Vollständiger Name des Benutzers                     |
+| Alter      | Angegebenes Alter                          |
+| Beigetreten   | Ob der Benutzer der Community beigetreten ist |
+```

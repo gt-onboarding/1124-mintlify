@@ -1,0 +1,64 @@
+---
+title: "Beispiele"
+description: "Code-Blöcke in der rechten Seitenleiste auf Desktop-Geräten anzeigen"
+icon: 'between-horizontal-start'
+---
+
+Die Komponenten `<RequestExample>` und `<ResponseExample>` zeigen Code-Blöcke in der rechten Seitenleiste an und erzeugen so ein zweispaltiges Layout, das Beispiele sichtbar hält, während Nutzer durch deine Inhalte scrollen. Diese Komponenten sind für API-Dokumentation konzipiert, funktionieren aber auf allen Seiten.
+
+Häufige Anwendungsfälle:
+
+* API-Endpoint-Dokumentation mit Request- und Response-Beispielen
+* Konfigurationsbeispiele neben erklärendem Text
+* Codebeispiele, auf die Nutzer beim Befolgen von Anweisungen zurückgreifen
+* Vorher-/Nachher-Beispiele in Tutorials
+
+Auf Mobilgeräten werden die Komponenten `<RequestExample>` und `<ResponseExample>` als regular Code-Blöcke angezeigt und können überscrollt werden.
+
+<RequestExample>
+  ```bash Request
+    curl --request POST \
+      --url https://dog-api.kinduff.com/api/facts
+  ```
+</RequestExample>
+
+<ResponseExample>
+  ```json Response
+  { "status": "success" }
+  ```
+</ResponseExample>
+
+<div id="requestexample">
+  ## RequestExample
+</div>
+
+Verwenden Sie `<RequestExample>`, um Codebeispiele in der rechten Seitenleiste anzuheften. Diese Komponente funktioniert ähnlich wie die Komponente [CodeGroup](/de/components/code-groups), zeigt den Code jedoch in der Seitenleiste statt inline an.
+
+Sie können mehrere Code-Blocks innerhalb eines einzelnen `<RequestExample>` einfügen. Jeder Code-Block muss ein Titel-Attribut haben.
+
+````mdx RequestExample
+<RequestExample>
+
+```bash Anfrage
+  curl --request POST \
+    --url https://dog-api.kinduff.com/api/facts
+```
+
+</RequestExample>
+````
+
+<div id="responseexample">
+  ## ResponseExample
+</div>
+
+Die Komponente `<ResponseExample>` pinnt Codebeispiele in der rechten Seitenleiste unterhalb der `<RequestExample>`-Inhalte auf derselben Seite.
+
+````mdx ResponseExample
+<ResponseExample>
+
+```json Response
+{ "status": "success" }
+```
+
+</ResponseExample>
+````

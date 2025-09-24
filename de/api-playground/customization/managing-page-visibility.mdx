@@ -1,0 +1,90 @@
+---
+title: "Sichtbarkeit von Seiten verwalten"
+description: "Steuern, welche Endpoints aus Ihrer OpenAPI-Spezifikation in der Navigationsstruktur der Dokumentation erscheinen"
+---
+
+Sie können festlegen, welche OpenAPI-Operationen als Dokumentationsseiten veröffentlicht werden und wie sie in der Navigation sichtbar sind. Das ist hilfreich für ausschließlich interne Endpoints, veraltete Operationen, Beta-Funktionen oder Endpoints, die per direkter URL erreichbar sein sollen, aber nicht über die Seitennavigation auffindbar.
+
+Wenn Ihre Seiten aus einem OpenAPI-Dokument automatisch generiert werden, können Sie die Sichtbarkeit mit den Erweiterungen `x-hidden` und `x-excluded` steuern.
+
+<div id="x-hidden">
+  ## `x-hidden`
+</div>
+
+Die Erweiterung `x-hidden` erstellt eine Seite für einen Endpoint, blendet sie jedoch in der Navigation aus. Die Seite ist nur erreichbar, wenn man direkt ihre URL aufruft.
+
+Häufige Anwendungsfälle für `x-hidden` sind:
+
+- Endpoints, die Sie dokumentieren, aber nicht hervorheben möchten.
+- Seiten, auf die Sie aus anderen Inhalten verlinken.
+- Endpoints für bestimmte Nutzer.
+
+<div id="x-excluded">
+  ## `x-excluded`
+</div>
+
+Die Erweiterung `x-excluded` schließt einen Endpoint vollständig aus Ihrer Dokumentation aus.
+
+Typische Anwendungsfälle für `x-excluded` sind:
+
+- Endpoints, die nur intern verwendet werden.
+- Veraltete Endpoints, die Sie nicht dokumentieren möchten.
+- Beta-Funktionen, die noch nicht für die öffentliche Dokumentation bereit sind.
+
+<div id="implementation">
+  ## Implementierung
+</div>
+
+Fügen Sie die Erweiterung `x-hidden` oder `x-excluded` unter der HTTP-Methode in Ihrer OpenAPI-Spezifikation hinzu.
+
+Hier sind Beispiele, wie jede Eigenschaft in einem OpenAPI-Schemadokument für ein Endpoint und einen Webhook-Pfad verwendet wird.
+
+```json {11, 19}
+"paths": {
+  "/plants": {
+    "get": {
+      "description": "Gibt alle Pflanzen aus dem Shop zurück",
+      "parameters": { /*...*/ },
+      "responses": { /*...*/ }
+    }
+  },
+  "/hidden_plants": {
+    "get": {
+      "x-hidden": true,
+      "description": "Gibt alle etwas geheimen Pflanzen aus dem Shop zurück",
+      "parameters": { /*...*/ },
+      "responses": { /*...*/ }
+    }
+  },
+  "/secret_plants": {
+    "get": {
+      "x-excluded": true,
+      "description": "Gibt alle streng geheimen Pflanzen aus dem Shop zurück (diesen Endpoint nicht veröffentlichen!)",
+      "parameters": { /*...*/ },
+      "responses": { /*...*/ }
+    }
+  }
+},
+```
+
+```json {9, 15}
+"webhooks": {
+  "/plants_hook": {
+    "post": {
+      "description": "Webhook für Informationen über eine neue Pflanze, die dem Shop hinzugefügt wurde",
+    }
+  },
+  "/hidden_plants_hook": {
+    "post": {
+      "x-hidden": true,
+      "description": "Webhook für vertrauliche Informationen über eine neue Pflanze, die dem Shop hinzugefügt wurde"
+    }
+  },
+  "/secret_plants_hook": {
+    "post": {
+      "x-excluded": true,
+      "description": "Webhook für streng geheime Informationen über eine neue Pflanze, die dem Shop hinzugefügt wurde (diesen Endpoint nicht veröffentlichen!)"
+    }
+  }
+}
+```
